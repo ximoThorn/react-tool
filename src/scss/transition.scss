@@ -1,0 +1,23 @@
+.popper-enter {
+  opacity: 0;
+  transform: scaleY(0);
+}
+.popper-exit-done {
+  display: none;
+}
+.popper-enter-active {
+  opacity: 1;
+  transform: scaleY(1);
+  transition: all 300ms;
+}
+.popper-exit, .popper-enter-done {
+  opacity: 1;
+}
+.popper-enter-done {
+  display: block;
+}
+.popper-exit-active {
+  opacity: 0;
+  transform: scaleY(0);
+  transition: all 300ms;
+}
