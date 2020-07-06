@@ -55,6 +55,12 @@ class DrPopper extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    if (!this.props.transfer) { // 如果transfer为true, 则在父组件销毁前手动调用removeChild方法销毁popper
+      this.removeChild()
+    }
+  }
+
   popperUpdate() {
     this.createPopper({
       placement: this.props.placement,
@@ -133,7 +139,7 @@ class DrPopper extends React.Component {
 }
 
 DrPopper.propTypes = {
-  placement: PropTypes.string,
+  placement: PropTypes.oneOf(['top', 'bottom', 'top-start', 'bottom-start', 'top-end', 'bottom-end', 'left', 'left-start', 'left-end', 'right', 'right-start', 'right-end']),
   offset: PropTypes.string,
   showArrow: PropTypes.bool,
   children: PropTypes.element,
