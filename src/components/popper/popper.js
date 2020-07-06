@@ -28,9 +28,9 @@ class DrPopper extends React.Component {
       return true
     }
     if (transfer) {
-      document.body.appendChild(this.popperEl.current);
+      !document.body.contains(this.popperEl.current) && document.body.appendChild(this.popperEl.current);
     } else {
-      this.parentNode.appendChild(this.popperEl.current)
+      !this.parentNode.contains(this.popperEl.current) && this.parentNode.appendChild(this.popperEl.current)
     }
     return true
   }
