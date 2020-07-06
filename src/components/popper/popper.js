@@ -14,6 +14,7 @@ class DrPopper extends React.Component {
   componentDidMount() {
     // 如果transfer为true，那么删掉当前popper节点，在shouldComponentUpdate钩子中添加至body最后面
     if (!this.props.transfer) {
+      this.popperEl.current.style.display = this.props.visible ? 'block' : 'none'
       return
     }
     this.parentNode = this.popperEl.current.parentNode;
@@ -22,30 +23,11 @@ class DrPopper extends React.Component {
   }
 
   shouldComponentUpdate({visible}) {
-    if (!this.props.transfer) {
-      this.popperEl.current.style.display = visible ? 'block' : 'none';
-      return true
-    }
     if (visible) {
       document.body.appendChild(this.popperEl.current);
-    } else {
-      // this.popperEl.current.style.display = 'none';
-      // const timeout = setTimeout(() => {
-      //   this.popperEl.current.style.display = 'none';
-      //   console.log(timeout, 'timeout')
-      //   window.clearTimeout(timeout)
-      // }, 300)
     }
     return true
   }
-
-  // componentWillUpdate(nextProps) {
-  //   if (nextProps.visible) {
-  //     // this.popperEl.current.style.display = 'block';
-  //   } else {
-  //     // this.popperEl.current.style.display = 'none';
-  //   }
-  // }
 
   componentDidUpdate() {
     if (!this.props.visible) {
@@ -100,6 +82,7 @@ class DrPopper extends React.Component {
     } else {
       this.popperEl.current.style.display = 'none';
     }
+    DrPopper.currentPopper.destroy();
     DrPopper.currentPopper = undefined;
   }
 

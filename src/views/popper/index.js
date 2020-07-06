@@ -17,9 +17,8 @@ const Popper = () => {
 
   useEffect(() => {
     const popperRefCopy = popperRef.current
+    console.log(popperRef)
     return () => {
-      // debugger
-      console.log(popperRef, 'popperRef')
       popperRefCopy.removeChild();
     }
   }, [popperRef])
@@ -34,6 +33,7 @@ const Popper = () => {
 
   const handlerEnter = useCallback(() => {
     console.log('enter')
+    popperRef.current.popperEl.current.style.display = 'block'; 
     setClickFlag(() => true)
   }, [])
 
@@ -48,6 +48,7 @@ const Popper = () => {
   }, [])
   const handlerExited = useCallback(() => {
     console.log('exited')
+    popperRef.current.popperEl.current.style.display = 'none';
     setClickFlag(() => false)
   }, [])
 
