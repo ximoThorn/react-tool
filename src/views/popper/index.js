@@ -12,16 +12,22 @@ const Popper = () => {
 
   useEffect(() => {
     setReference(referenceRef.current)
-
-  }, [])
+    const popperRefCopy = popperRef.current
+    return () => {
+      popperRefCopy.removeChild() // removeChild(); // 父组件卸载时，移除dom
+    }
+  }, [referenceRef])
 
   useEffect(() => {
-    const popperRefCopy = popperRef.current
     console.log(popperRef)
-    return () => {
-      popperRefCopy.removeChild();
+    const popperRefCopy = popperRef.current
+
+    if (visible) {
+      popperRefCopy.popperUpdate() // popper初始化
+    } else {
+      popperRefCopy.popperDetory(); // popper销毁
     }
-  }, [popperRef])
+  }, [visible, popperRef])
 
   const handlerClick= () => {
     if (clickFlag) {

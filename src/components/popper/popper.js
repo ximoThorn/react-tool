@@ -20,25 +20,28 @@ class DrPopper extends React.Component {
     this.parentNode = this.popperEl.current.parentNode;
     const commentNode = document.createComment('');
     this.parentNode.replaceChild(commentNode, this.popperEl.current);
+    
   }
 
-  shouldComponentUpdate({visible, transfer}) {
-    if (visible) {
-      if (transfer) {
-        document.body.appendChild(this.popperEl.current);
-      } else {
-        this.parentNode.appendChild(this.popperEl.current)
-      }
+  shouldComponentUpdate({visible, transfer}) { 
+    if (!visible) {
+      return true
+    }
+    if (transfer) {
+      document.body.appendChild(this.popperEl.current);
+    } else {
+      this.parentNode.appendChild(this.popperEl.current)
     }
     return true
   }
 
   componentDidUpdate() {
-    if (!this.props.visible) {
-      this.popperDetory()
-    } else {
-      this.props.reference && this.popperUpdate()
-    }
+    // this.props.reference && this.popperUpdate()
+    // if (!this.props.visible) {
+    //   this.popperDetory()
+    // } else {
+      
+    // }
   }
 
   componentWillUnmount() {
@@ -86,7 +89,6 @@ class DrPopper extends React.Component {
     } else {
       this.parentNode.contains(this.popperEl.current) && this.parentNode.removeChild(this.popperEl.current)
     }
-    DrPopper.currentPopper.destroy();
     DrPopper.currentPopper = undefined;
   }
 
@@ -132,7 +134,7 @@ DrPopper.propTypes = {
   children: PropTypes.element,
   reference: PropTypes.object,
   count: PropTypes.number,
-  visible: PropTypes.bool,
+  visible: PropTypes.bool.isRequired, // 因为DrPopper要知道是否渲染在body最外层，如果是false，默认初始是不渲染的，所以要判断
   transfer: PropTypes.bool
 }
 
