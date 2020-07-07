@@ -9,6 +9,7 @@ import {
 import Home from './views'
 import Test from './views/test';
 import Popper from './views/popper'
+import HookTest from './views/hook'
 
 class App extends Component {
   render() {
@@ -23,6 +24,9 @@ class App extends Component {
           </Route>
           <Route path='/popper'>
             <Popper />
+          </Route>
+          <Route path='/hooks'>
+            <HookTest />
           </Route>
         </Switch>
       </Router>

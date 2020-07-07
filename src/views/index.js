@@ -13,6 +13,9 @@ const Home = () => {
       <div>
         <Link to="/popper">popper</Link>
       </div>
+      <div>
+        <Link to="/hooks">hooks</Link>
+      </div>
     </div>
   )
 }
