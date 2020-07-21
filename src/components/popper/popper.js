@@ -13,14 +13,9 @@ class DrPopper extends React.Component {
 
   componentDidMount() {
     // 如果transfer为true，那么删掉当前popper节点，在shouldComponentUpdate钩子中添加至body最后面
-    // if (!this.props.transfer) {
-    //   this.popperEl.current.style.display = this.props.visible ? 'block' : 'none'
-    //   return
-    // }
     this.parentNode = this.popperEl.current.parentNode;
     const commentNode = document.createComment('');
     this.parentNode.replaceChild(commentNode, this.popperEl.current);
-    
   }
 
   shouldComponentUpdate({visible, transfer}) { 
@@ -33,15 +28,6 @@ class DrPopper extends React.Component {
       !this.parentNode.contains(this.popperEl.current) && this.parentNode.appendChild(this.popperEl.current)
     }
     return true
-  }
-
-  componentDidUpdate() {
-    // this.props.reference && this.popperUpdate()
-    // if (!this.props.visible) {
-    //   this.popperDetory()
-    // } else {
-      
-    // }
   }
 
   componentWillUnmount() {
@@ -75,10 +61,8 @@ class DrPopper extends React.Component {
 
   popperDetory() {
     if (DrPopper.currentPopper) {
-      setTimeout(() => { // 动画结束后才销毁popper
-        DrPopper.currentPopper && DrPopper.currentPopper.destroy();
-        DrPopper.currentPopper = null;
-      }, 300);
+      DrPopper.currentPopper && DrPopper.currentPopper.destroy();
+      DrPopper.currentPopper = null;
     };
   }
 
@@ -117,9 +101,9 @@ class DrPopper extends React.Component {
   }
 
   render() {
-    const { children } = this.props
+    const { children, visible } = this.props
     return (
-      <div ref={this.popperEl} className="dr-popper">
+      <div ref={this.popperEl} style={{display: visible ? 'block' : 'none'}} className="dr-popper">
         {children }
         {/* <div v-if="showArrow" ref="arrow" class="dr-popper-arrow"></div> */}
       </div>

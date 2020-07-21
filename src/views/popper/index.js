@@ -1,22 +1,23 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react'
+import React, { useRef, useEffect, useState, useCallback, useLayoutEffect } from 'react'
 import { CSSTransition } from 'react-transition-group';
 
 import DrPopper from '../../components/popper/popper'
 
 const Popper = () => {
-  const [reference, setReference] = useState(undefined)
+  // const [reference, setReference] = useState(undefined)
+  const [show, setShow] = useState(false)
   const [visible, setVisible] = useState(false)
   const referenceRef = useRef()
   const popperRef = useRef()
-  const [clickFlag, setClickFlag] = useState(false)
+  const [clickFlag, setClickFlag] = useState(() => false)
 
-  useEffect(() => {
-    setReference(referenceRef.current)
+  useLayoutEffect(() => {
+    // setReference(referenceRef.current)
     const popperRefCopy = popperRef.current
     return () => {
       popperRefCopy.removeChild() // removeChild(); // 父组件卸载时，移除dom
     }
-  }, [referenceRef])
+  }, [])
 
   useEffect(() => {
     console.log(popperRef)
@@ -33,14 +34,15 @@ const Popper = () => {
     if (clickFlag) {
       return
     }
-    console.log(1)
-    setVisible(preState => !preState)
+    console.log(111)
+    setShow(preState => !preState)
   }
 
   const handlerEnter = useCallback(() => {
     console.log('enter')
-    popperRef.current.popperEl.current.style.display = 'block'; 
+    // popperRef.current.popperEl.current.style.display = 'block';
     setClickFlag(() => true)
+    setVisible(() => true)
   }, [])
 
   const handlerEntered = useCallback(() => {
@@ -54,7 +56,8 @@ const Popper = () => {
   }, [])
   const handlerExited = useCallback(() => {
     console.log('exited')
-    popperRef.current.popperEl.current.style.display = 'none';
+    setVisible(() => false)
+    // popperRef.current.popperEl.current.style.display = 'none';
     setClickFlag(() => false)
   }, [])
 
@@ -63,14 +66,14 @@ const Popper = () => {
       <div onClick={handlerClick} ref={referenceRef} className="popper-reference">
         reference
       </div>
-      <CSSTransition in={visible}
+      <CSSTransition in={show}
         onEnter={handlerEnter}
         onEntered={handlerEntered}
         onExit={handlerExit}
         onExited={handlerExited}
         classNames="popper"
-        timeout={300}>
-        <DrPopper ref={popperRef} visible={visible} reference={reference}>
+        timeout={350}>
+        <DrPopper ref={popperRef} visible={visible} reference={referenceRef.current}>
           <div className="popper-target">
             popper
             <br/>
