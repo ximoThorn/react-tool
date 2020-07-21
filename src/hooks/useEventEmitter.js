@@ -22,6 +22,10 @@ class EventEmitter {
       }
     }, [])
   }
+
+  $off(method) {
+    EventEmitter.subscriptions[method] && (EventEmitter.subscriptions[method] = undefined)
+  }
 }
 
 const useEventEmitter = () => {
