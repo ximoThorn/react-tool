@@ -80,6 +80,7 @@ class DrPopper extends React.Component {
     if (!this.props.reference || !this.popperEl.current) {
       return;
     }
+    this.resetTransformOrigin();
     if (DrPopper.currentPopper) {
       DrPopper.currentPopper.update();
     } else {
@@ -103,7 +104,9 @@ class DrPopper extends React.Component {
   render() {
     const { children, visible } = this.props
     return (
-      <div ref={this.popperEl} style={{display: visible ? 'block' : 'none'}} className="dr-popper">
+      <div ref={this.popperEl}
+        style={{display: visible ? 'block' : 'none'}}
+        className="dr-popper">
         {children }
         {/* <div v-if="showArrow" ref="arrow" class="dr-popper-arrow"></div> */}
       </div>

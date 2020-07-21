@@ -40,13 +40,13 @@ const Popper = () => {
 
   const handlerEnter = useCallback(() => {
     console.log('enter')
-    // popperRef.current.popperEl.current.style.display = 'block';
     setClickFlag(() => true)
     setVisible(() => true)
   }, [])
 
   const handlerEntered = useCallback(() => {
     console.log('entered')
+    debugger
     setClickFlag(() => false)
   }, [])
 
@@ -57,7 +57,6 @@ const Popper = () => {
   const handlerExited = useCallback(() => {
     console.log('exited')
     setVisible(() => false)
-    // popperRef.current.popperEl.current.style.display = 'none';
     setClickFlag(() => false)
   }, [])
 
@@ -72,8 +71,10 @@ const Popper = () => {
         onExit={handlerExit}
         onExited={handlerExited}
         classNames="popper"
-        timeout={350}>
-        <DrPopper ref={popperRef} visible={visible} reference={referenceRef.current}>
+        timeout={300}>
+        <DrPopper ref={popperRef}
+          visible={visible}
+          reference={referenceRef.current}>
           <div className="popper-target">
             popper
             <br/>
