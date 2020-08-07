@@ -23,6 +23,16 @@ class EventEmitter {
     }, [])
   }
 
+  $once(method, fun) {
+    const _this = this
+
+    function on () {
+      _this.$off(method, on)
+      fun.apply(_this, arguments)
+    }
+    _this.$on(method, on)
+  }
+
   $off(method) {
     EventEmitter.subscriptions[method] && (EventEmitter.subscriptions[method] = undefined)
   }

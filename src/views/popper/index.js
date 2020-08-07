@@ -46,7 +46,6 @@ const Popper = () => {
 
   const handlerEntered = useCallback(() => {
     console.log('entered')
-    debugger
     setClickFlag(() => false)
   }, [])
 

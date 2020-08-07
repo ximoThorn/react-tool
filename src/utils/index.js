@@ -1,4 +1,13 @@
-export const getTargetDom = function (target) {
+
+/**
+ *
+ *
+ * @export
+ * @param {*} target
+ * @returns
+ */
+export function getTargetDom (target) {
+  
   if (!target) {
     return
   }
@@ -10,4 +19,3 @@ export const getTargetDom = function (target) {
   }
   return target
 }
-

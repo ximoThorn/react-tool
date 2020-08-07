@@ -1,4 +1,5 @@
 import React, { createRef } from 'react';
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 
 const Popper = require('popper.js/dist/umd/popper.js');
@@ -8,32 +9,10 @@ class DrPopper extends React.Component {
   constructor(props) {
     super(props)
     this.popperEl = createRef();
-    this.parentNode = '';
-  }
-
-  componentDidMount() {
-    // 如果transfer为true，那么删掉当前popper节点，在shouldComponentUpdate钩子中添加至body最后面
-    this.parentNode = this.popperEl.current.parentNode;
-    const commentNode = document.createComment('');
-    this.parentNode.replaceChild(commentNode, this.popperEl.current);
-  }
-
-  shouldComponentUpdate({visible, transfer}) { 
-    if (!visible) {
-      return true
-    }
-    if (transfer) {
-      !document.body.contains(this.popperEl.current) && document.body.appendChild(this.popperEl.current);
-    } else {
-      !this.parentNode.contains(this.popperEl.current) && this.parentNode.appendChild(this.popperEl.current)
-    }
-    return true
   }
 
   componentWillUnmount() {
-    if (!this.props.transfer) { // 如果transfer为true, 则在父组件销毁前手动调用removeChild方法销毁popper
-      this.removeChild()
-    }
+    this.popperDetory()
   }
 
   popperUpdate() {
@@ -66,16 +45,6 @@ class DrPopper extends React.Component {
     };
   }
 
-  removeChild() {
-    if (this.props.transfer) {
-      // 当父组件销毁时，移除
-      document.body.contains(this.popperEl.current) && document.body.removeChild(this.popperEl.current);
-    } else {
-      this.parentNode.contains(this.popperEl.current) && this.parentNode.removeChild(this.popperEl.current)
-    }
-    DrPopper.currentPopper = undefined;
-  }
-
   createPopper(options = {}) {
     if (!this.props.reference || !this.popperEl.current) {
       return;
@@ -102,8 +71,8 @@ class DrPopper extends React.Component {
   }
 
   render() {
-    const { children, visible } = this.props
-    return (
+    const { children, visible, transfer } = this.props
+    const result = (
       <div ref={this.popperEl}
         style={{display: visible ? 'block' : 'none'}}
         className="dr-popper">
@@ -111,6 +80,7 @@ class DrPopper extends React.Component {
         {/* <div v-if="showArrow" ref="arrow" class="dr-popper-arrow"></div> */}
       </div>
     )
+    return transfer ? createPortal(result, document.body) : result
   } 
 }
 
