@@ -30,9 +30,6 @@ class EventEmitter {
     if (!flag) {
       EventEmitter.subscriptions[method] = cb
     }
-    return () => {
-      EventEmitter.subscriptions = {}
-    }
   }
 
   /**
