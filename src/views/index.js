@@ -16,6 +16,9 @@ const Home = () => {
       <div>
         <Link to="/hooks">hooks</Link>
       </div>
+      <div>
+        <Link to="/flip/flipCard">flip动画</Link>
+      </div>
     </div>
   )
 }

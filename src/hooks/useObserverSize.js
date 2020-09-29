@@ -3,6 +3,13 @@ import ResizeObserver from 'resize-observer-polyfill'
 
 import { getTargetDom } from '../utils/index'
 
+/**
+ *监听dom大小变化的回调hook
+ *
+ * @param {*} target
+ * @param {*} cb
+ * @returns
+ */
 const useObserverSize = (target, cb) => {
   const [state, setState] = useState(() => {
     const targetDom = getTargetDom(target) || {}

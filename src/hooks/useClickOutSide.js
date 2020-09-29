@@ -3,6 +3,14 @@ import { getTargetDom } from '../utils/index'
 
 const defaultEventName = 'click'
 
+
+/**
+ *点击非目标dom事件
+ *
+ * @param {*} [cb=function() {}]
+ * @param {*} target
+ * @param {*} [eventName=defaultEventName]
+ */
 const useClickOutSide = (cb = function() {}, target, eventName = defaultEventName) => {
 
   const handler = useCallBack((e) => {
