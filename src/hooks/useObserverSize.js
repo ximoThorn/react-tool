@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from 'react'
+import { useState, useLayoutEffect, useRef } from 'react'
 import ResizeObserver from 'resize-observer-polyfill'
 
 import { getTargetDom } from '../utils/index'
@@ -11,6 +11,8 @@ import { getTargetDom } from '../utils/index'
  * @returns
  */
 const useObserverSize = (target, cb) => {
+  const refCb = useRef(cb)
+
   const [state, setState] = useState(() => {
     const targetDom = getTargetDom(target) || {}
     return {
@@ -33,7 +35,7 @@ const useObserverSize = (target, cb) => {
           height: entry.target.clientHeight
         }))
         // 传入cb的时候需要做下节流
-        cb && cb({
+        refCb.current && refCb.current({
           width: entry.target.clientWidth,
           height: entry.target.clientHeight
         })
@@ -46,7 +48,7 @@ const useObserverSize = (target, cb) => {
       ResizeObserverObj.disconnect()
     }
 
-  }, [target, cb]) // 这里监听了cb，所以传入的cb需要做useCallback处理，斗则将触发无限执行！！！！！
+  }, [target]) // 这里监听了cb，所以传入的cb需要做useCallback处理，斗则将触发无限执行！！！！！
 
   return state
 }

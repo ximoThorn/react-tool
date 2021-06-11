@@ -4,9 +4,13 @@ import useObserverSize from '../../hooks/useObserverSize'
 const HookTest = () => {
   const ref = useRef()
 
-  const callback = useCallback(res => {
+  // const callback = useCallback(res => {
+  //   console.log(res, '变化了')
+  // }, [])
+  // console.log('re')
+  const callback = (res) => {
     console.log(res, '变化了')
-  }, [])
+  }
 
   const result = useObserverSize(ref, callback)
 

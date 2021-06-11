@@ -80,7 +80,7 @@ class DrPopper extends React.Component {
         {/* <div v-if="showArrow" ref="arrow" class="dr-popper-arrow"></div> */}
       </div>
     )
-    return transfer ? createPortal(result, document.body) : result
+    return transfer ? visible && createPortal(result, document.body) : result
   } 
 }
 
@@ -99,7 +99,7 @@ DrPopper.defaultProps = {
   placement: 'bottom-start',
   offset: '0, 5px',
   reference: undefined,
-  transfer: true
+  transfer: false
   // showArrow: true
 }
 

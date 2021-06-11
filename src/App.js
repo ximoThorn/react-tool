@@ -11,7 +11,8 @@ import Test from './views/test';
 import Popper from './views/popper'
 import HookTest from './views/hook'
 import FlipCard from './views/flip/flipCard'
-
+import ReRender from './views/reRender'
+import Interval from './views/inteval/inteval'
 class App extends Component {
   render() {
     return (
@@ -31,6 +32,12 @@ class App extends Component {
           </Route>
           <Route path='/flip/flipCard'>
             <FlipCard />
+          </Route>
+          <Route path='/rerender'>
+            <ReRender />
+          </Route>
+          <Route path='/inteval'>
+            <Interval />
           </Route>
         </Switch>
       </Router>

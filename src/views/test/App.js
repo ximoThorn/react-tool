@@ -7,13 +7,41 @@ import Child4 from './Child4';
 
 import Dialog from './Dialog'
 
+
+
+// 创建多个ref句柄
+// const App = () => {
+//   const [refs] = useState(() => ({}))
+
+//   return (
+//     <div>
+//       {
+//         CITYS.map((item, index) => {
+//           refs[index] = createRef() // 这里
+//           return (
+//             <ACustomLayer key={item.name}
+//               emitRef={refs[index]}
+//               onRender={($amap, el) => handleCustomLayerRender($amap, el, item)}
+//               zooms={[3, 10]}>
+//               <div className="map-custom-layer">
+//                 <div>
+//                   <p>{item.name}</p>
+//                   <p>{item.num}</p>
+//                 </div>
+//               </div>
+//             </ACustomLayer>
+//           )
+//         })
+//       }
+//     </div>
+//   )
+// }
+
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.child = createRef()
-    for (let i = 0; i < 2; i++) {
-      this[`childRef${i}`] = createRef()
-    }
     
   }
   componentDidMount() {

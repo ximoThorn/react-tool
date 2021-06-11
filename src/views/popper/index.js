@@ -31,11 +31,18 @@ const Popper = () => {
   }, [visible, popperRef])
 
   const handlerClick= () => {
-    if (clickFlag) {
-      return
-    }
+    // if (clickFlag) {
+    //   return
+    // }
     console.log(111)
-    setShow(preState => !preState)
+    setShow(true)
+  }
+  const handlerClickMouse= () => {
+    // if (clickFlag) {
+    //   return
+    // }
+    console.log(222)
+    setShow(false)
   }
 
   const handlerEnter = useCallback(() => {
@@ -61,8 +68,10 @@ const Popper = () => {
 
   return (
     <div className="popper-wrap">
-      <div onClick={handlerClick} ref={referenceRef} className="popper-reference">
-        reference
+      <div style={{height: 1200}}>
+        <div onMouseEnter={handlerClick} onMouseLeave={handlerClickMouse} ref={referenceRef} className="popper-reference">
+          reference
+        </div>
       </div>
       <CSSTransition in={show}
         onEnter={handlerEnter}

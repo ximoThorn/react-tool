@@ -19,6 +19,12 @@ const Home = () => {
       <div>
         <Link to="/flip/flipCard">flip动画</Link>
       </div>
+      <div>
+        <Link to="/rerender">rerender</Link>
+      </div>
+      <div>
+        <Link to="/inteval">inteval</Link>
+      </div>
     </div>
   )
 }
