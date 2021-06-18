@@ -11,16 +11,22 @@ import Dialog from './Dialog'
 
 // 创建多个ref句柄
 // const App = () => {
-//   const [refs] = useState(() => ({}))
+//   const polygonRefs = useRef({})
+// const polygonRef = useCallback(com => {
+//   if (com && com.$aCustomLayer) {
+//     // 获取
+//     const { $aCustomLayer: { Ce: { extData } } } = com
+//     polygonRefs.current[extData] = com
+//   }
+// })
 
 //   return (
 //     <div>
 //       {
 //         CITYS.map((item, index) => {
-//           refs[index] = createRef() // 这里
-//           return (
+//           return ( // ACustomLayer需要forwardRef一下
 //             <ACustomLayer key={item.name}
-//               emitRef={refs[index]}
+//               ref={polygonRef}
 //               onRender={($amap, el) => handleCustomLayerRender($amap, el, item)}
 //               zooms={[3, 10]}>
 //               <div className="map-custom-layer">
