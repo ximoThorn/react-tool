@@ -12,13 +12,13 @@ import Dialog from './Dialog'
 // 创建多个ref句柄
 // const App = () => {
 //   const polygonRefs = useRef({})
-// const polygonRef = useCallback(com => {
-//   if (com && com.$aCustomLayer) {
-//     // 获取
-//     const { $aCustomLayer: { Ce: { extData } } } = com
-//     polygonRefs.current[extData] = com
-//   }
-// })
+  // const polygonRef = useCallback(com => {
+  //   if (com && com.$aCustomLayer) {
+  //     // 获取
+  //     const { $aCustomLayer: { Ce: { extData } } } = com
+  //     polygonRefs.current[extData] = com
+  //   }
+  // })
 
 //   return (
 //     <div>
